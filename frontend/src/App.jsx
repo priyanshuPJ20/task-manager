@@ -12,30 +12,30 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {location.pathname !== '/dashboard' && <Navbar />}
+      <Navbar />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        
+
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <DashboardPage />
           </ProtectedRoute>
         } />
-        
+
         <Route path="/projects" element={
           <ProtectedRoute>
             <ProjectsPage />
           </ProtectedRoute>
         } />
-        
+
         <Route path="/tasks" element={
           <ProtectedRoute>
             <TasksPage />
           </ProtectedRoute>
         } />
 
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
     </div>
   );
