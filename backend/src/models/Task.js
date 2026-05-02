@@ -26,6 +26,6 @@ const taskSchema = new mongoose.Schema({
   dueDate: {
     type: Date,
   },
-}, { timestamps: true });
+}, { timestamps: true, collection: 'todo' });
 
 module.exports = mongoose.model('Task', taskSchema);
