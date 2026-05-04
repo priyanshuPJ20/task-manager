@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'https://task-manager-production-092e.up.railway.app/api',
+  // baseURL: 'http://localhost:5000/api'
 });
 
 // Request interceptor — attach JWT token
