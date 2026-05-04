@@ -1,7 +1,16 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
 
-export const AuthContext = createContext();
+// Separate the context object into its own file-level export
+// so Vite Fast Refresh doesn't get confused (it requires a file to export
+// only React components, or only non-component values — not both).
+const AuthContext = createContext();
+
+// Custom hook — cleaner than importing AuthContext directly in every component
+export const useAuth = () => useContext(AuthContext);
+
+// Keep the named export for backward compatibility with existing code
+export { AuthContext };
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -10,7 +19,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        localStorage.removeItem('user');
+      }
     }
     setLoading(false);
   }, []);
