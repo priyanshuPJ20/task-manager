@@ -3,11 +3,18 @@ const mongoose = require('mongoose');
 const projectSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, 'Project name is required'],
+    trim: true,
   },
   description: {
     type: String,
-    required: true,
+    required: [true, 'Project description is required'],
+    trim: true,
+  },
+  status: {
+    type: String,
+    enum: ['active', 'archived'],
+    default: 'active',
   },
   members: [{
     type: mongoose.Schema.Types.ObjectId,
